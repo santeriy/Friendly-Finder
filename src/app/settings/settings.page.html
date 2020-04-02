@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button><ion-icon name="menu-outline"></ion-icon></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Change username</ion-label>
+    <ion-input placeholder="Current username"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Theme</ion-label>
+    <ion-select placeholder="Select One">
+      <ion-select-option value="default">Default theme</ion-select-option>
+      <ion-select-option value="dark">Dark theme</ion-select-option>
+      <ion-select-option value="accessibility">Accessible theme</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Location update interval</ion-label>
+    <ion-select placeholder="Select One">
+      <ion-select-option value="1m">1 Minute</ion-select-option>
+      <ion-select-option value="2m">2 Minutes</ion-select-option>
+      <ion-select-option value="5m">5 Minutes</ion-select-option>
+      <ion-select-option value="10m">10 Minutes</ion-select-option>
+      <ion-select-option value="realtime">Real-time</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Current room pass</ion-label>
+    <ion-input value="yes" readonly></ion-input>
+  </ion-item>
+  
+  <ion-button color="success">
+    <ion-label>Save</ion-label>
+  </ion-button>
+  
+  <br>
+  <ion-button routerLink="/home" color="secondary">
+    <ion-label>Back</ion-label>
+  </ion-button>
+</ion-content>

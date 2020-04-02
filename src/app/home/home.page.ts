@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { ModalPage } from '../modal/modal.page';
-
 
 @Component({
   selector: 'app-home',
@@ -14,9 +11,9 @@ showchat: boolean;
 
   constructor() {}
 
+
+  // Toggle chat if the chat button is pressed
   async openchat() {
-    console.log("showing chat");
-    
     if (this.showchat == true) {
       this.showchat = false;
     } else {
