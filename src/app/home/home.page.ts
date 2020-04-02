@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from '../modal/modal.page';
+
 
 @Component({
   selector: 'app-home',
@@ -7,6 +10,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+showchat: boolean;
+
   constructor() {}
 
+  async openchat() {
+    console.log("showing chat");
+    
+    if (this.showchat == true) {
+      this.showchat = false;
+    } else {
+      this.showchat = true;
+    }
+  }
+  
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -13,7 +14,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public alertController: AlertController
   ) {
     this.initializeApp();
   }
@@ -24,4 +26,37 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+
+  async joinroom() {
+    console.log("spawning alert");
+    const alert = await this.alertController.create({
+      header: 'Enter room pass',
+      inputs: [
+        {
+          name: 'password',
+          type: 'text',
+          placeholder: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
 }
