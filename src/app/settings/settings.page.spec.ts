@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 import { SettingsPage } from './settings.page';
 
 describe('SettingsPage', () => {

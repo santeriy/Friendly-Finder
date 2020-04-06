@@ -1,9 +1,12 @@
 import { Coordinates } from '@ionic-native/geolocation/ngx';
 import { MapService } from '../map.service';
 
-
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
+import { SettingsPage } from '../settings/settings.page';
+
+
+
 
 
 @Component({
@@ -20,13 +23,17 @@ export class HomePage implements OnInit {
   // map-style
   style = 'mapbox://styles/mapbox/dark-v10';
   // marker-color
-  colorcode = "#ff00ff"
+  colorcode: any;
   lat: number
   lng: number
+
+
   
   // data
   source: any;
   markers: any;
+  markercolor: any;
+  value: any;
 
   constructor(private mapService: MapService) {
   }
@@ -35,6 +42,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.initializeMap()
+    console.log(this.mapService.markercolor)
+
   }
 
   async openchat() {
@@ -45,12 +54,17 @@ export class HomePage implements OnInit {
     }
   }
 
+
+  
   private initializeMap() {
     /// locate the user
+
     this.mapService.getLocation().then(data => {
       this.coordinates = data.coords;
       this.lat = data.coords.latitude;
       this.lng = data.coords.longitude;
+
+      this.mapService.markercolor = this.colorcode;
 
       this.buildMap()
 
@@ -67,25 +81,19 @@ export class HomePage implements OnInit {
       center: [this.lng, this.lat]
     });
     // Add marker on map
-    this.marker = new mapboxgl.Marker({"color" : this.colorcode})
+    this.marker = new mapboxgl.Marker({"color" : this.mapService.markercolor})
       .setLngLat([this.lng, this.lat])
       .addTo(this.map);
 
     /// Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
   }
-
-  markerColor(colorcode){
+  
+  markerColor(){
     this.marker.remove(this.marker);
-    this.colorcode = colorcode;
-    console.log(this.colorcode);
-    this.marker = new mapboxgl.Marker({"color" : this.colorcode})
+    this.marker = new mapboxgl.Marker({"color" : this.mapService.markercolor})
     .setLngLat([this.lng, this.lat])
     .addTo(this.map);
-  }
-  
-  mapStyle(style){
-    this.style = style;
-
+    console.log("nyt ",this.mapService.markercolor)
   }
 }

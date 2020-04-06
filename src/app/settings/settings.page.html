@@ -34,12 +34,11 @@
   </ion-item>
     <ion-item>
       <ion-label>Marker Color</ion-label>
-      <ion-select placeholder="Choose">
-        <ion-select-option value="blue">Blue</ion-select-option>
-        <ion-select-option value="red">Red</ion-select-option>
-        <ion-select-option value="pink">Pink</ion-select-option>
-        <ion-select-option value="white">White</ion-select-option>
-        <ion-select-option value="green">Green</ion-select-option>
+      <ion-select [(ngModel)]="markercolor" placeholder="Choose">
+        <ion-select-option value="#261ec7">Blue</ion-select-option>
+        <ion-select-option value="#FF0000">Red</ion-select-option>
+        <ion-select-option value="#ff00ff">Pink</ion-select-option>
+        <ion-select-option value="#FFFFFF">White</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -49,11 +48,8 @@
   </ion-item>
   <ion-item>
 
-
-
-    
   </ion-item>
-  <ion-button color="success">
+  <ion-button color="success" (click)="save()">
     <ion-label>Save</ion-label>
   </ion-button>
   

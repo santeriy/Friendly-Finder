@@ -9,6 +9,8 @@ import * as mapboxgl from 'mapbox-gl';
 })
 export class MapService {
 
+  markercolor: string
+
   constructor(private geolocation: Geolocation) { 
 
     mapboxgl.accessToken = environment.mapbox.accessToken
@@ -21,4 +23,9 @@ export class MapService {
   public watchPosition(){
     return this.geolocation.watchPosition();
   } 
+
+  public color(value){
+    this.markercolor = value;
+    console.log(this.markercolor);
+  }
 }
