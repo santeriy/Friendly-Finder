@@ -8,10 +8,20 @@
     </ion-button>
   </ion-toolbar>
 </ion-header>
-
-
-
-
+<ion-row>
+<ion-item>
+<ion-button  color="dark" (click)="markerColor('#261ec7')">Blue</ion-button>
+</ion-item>
+<ion-item>
+  <ion-button  color="dark" (click)="markerColor('#FF0000')">Red</ion-button>
+  </ion-item>
+  <ion-item>
+    <ion-button  color="dark" (click)="markerColor('#ff00ff')">Pink</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button  color="dark" (click)="markerColor('#FFFFFF')">White</ion-button>
+      </ion-item>
+</ion-row>
 <ion-content class="noScroll">
   <div id="map" class="map"></div>
   <div id="chat" *ngIf="showchat" style="position:fixed;width:100%;bottom:0;height:50%;background:#000000ff">

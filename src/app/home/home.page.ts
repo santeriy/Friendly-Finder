@@ -74,4 +74,18 @@ export class HomePage implements OnInit {
     /// Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
   }
+
+  markerColor(colorcode){
+    this.marker.remove(this.marker);
+    this.colorcode = colorcode;
+    console.log(this.colorcode);
+    this.marker = new mapboxgl.Marker({"color" : this.colorcode})
+    .setLngLat([this.lng, this.lat])
+    .addTo(this.map);
+  }
+  
+  mapStyle(style){
+    this.style = style;
+
+  }
 }
