@@ -3,7 +3,8 @@ import { MapService } from '../map.service';
 
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import { SettingsPage } from '../settings/settings.page';
+import { ModalController } from '@ionic/angular';
+import { ChatPage } from '../modals/chat/chat.page';
 
 
 
@@ -28,14 +29,15 @@ export class HomePage implements OnInit {
   lng: number
 
 
-  
+
   // data
   source: any;
   markers: any;
   markercolor: any;
   value: any;
 
-  constructor(private mapService: MapService) {
+  constructor(private mapService: MapService,
+    private modalController: ModalController) {
   }
 
   coordinates: Coordinates;
@@ -46,16 +48,15 @@ export class HomePage implements OnInit {
 
   }
 
-  async openchat() {
-    if (this.showchat == true) {
-      this.showchat = false;
-    } else {
-      this.showchat = true;
-    }
+  async openModal(item) {
+    const modal = await this.modalController.create({
+      component: ChatPage
+    })
+    return await modal.present();
   }
 
 
-  
+
   private initializeMap() {
     /// locate the user
 
@@ -81,19 +82,19 @@ export class HomePage implements OnInit {
       center: [this.lng, this.lat]
     });
     // Add marker on map
-    this.marker = new mapboxgl.Marker({"color" : this.mapService.markercolor})
+    this.marker = new mapboxgl.Marker({ "color": this.mapService.markercolor })
       .setLngLat([this.lng, this.lat])
       .addTo(this.map);
 
     /// Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
   }
-  
-  markerColor(){
+
+  markerColor() {
     this.marker.remove(this.marker);
-    this.marker = new mapboxgl.Marker({"color" : this.mapService.markercolor})
-    .setLngLat([this.lng, this.lat])
-    .addTo(this.map);
-    console.log("nyt ",this.mapService.markercolor)
+    this.marker = new mapboxgl.Marker({ "color": this.mapService.markercolor })
+      .setLngLat([this.lng, this.lat])
+      .addTo(this.map);
+    console.log("nyt ", this.mapService.markercolor)
   }
 }

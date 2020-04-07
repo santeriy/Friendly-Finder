@@ -8,7 +8,5 @@ export class ColorService {
 
   constructor(private homePage: HomePage) { }
  
-  update(){
-  this.homePage.markerColor();
- }
+ 
 }
