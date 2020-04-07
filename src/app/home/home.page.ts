@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
   map: mapboxgl.Map;
   marker: mapboxgl.Marker;
   // map-style
-  style = 'mapbox://styles/mapbox/dark-v10';
+  style = 'mapbox://styles/mooregrimm/ck8k40yzs0yz51iocd9pemxhc';
   // marker-color
   colorcode: any;
   lat: number
