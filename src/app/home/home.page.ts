@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
   map: mapboxgl.Map;
   marker: mapboxgl.Marker;
   // map-style
-  style = 'mapbox://styles/mooregrimm/ck8k40yzs0yz51iocd9pemxhc';
+  style = 'mapbox://styles/mapbox/streets-v11';
   // marker-color
   colorcode: any;
   lat: number
@@ -28,7 +28,6 @@ export class HomePage implements OnInit {
       enableHighAccuracy: true
     },
     trackUserLocation: true
-
   })
 
   // data
@@ -80,6 +79,7 @@ export class HomePage implements OnInit {
       zoom: 13,
       center: [this.lng, this.lat]
     });
+
     // Add marker on map
 
     // this.marker = new mapboxgl.Marker({ "color": this.mapService.markercolor })
@@ -87,15 +87,17 @@ export class HomePage implements OnInit {
     //   .addTo(this.map);
 
     /// Add map controls
-    this.map.addControl(new mapboxgl.NavigationControl());
 
+    this.map.addControl(new mapboxgl.NavigationControl());
+    
+    /// Geolocate Control
     this.map.addControl(
       this.geolocate
     );
-    this.markerColor()
+    this.triggerLocation()
   }
 
-  markerColor() {
+  triggerLocation() {
     setTimeout(() => {
       this.geolocate.trigger()
     }, 50);
