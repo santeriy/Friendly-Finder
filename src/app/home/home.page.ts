@@ -6,10 +6,6 @@ import * as mapboxgl from 'mapbox-gl';
 import { ModalController } from '@ionic/angular';
 import { ChatPage } from '../modals/chat/chat.page';
 
-
-
-
-
 @Component({
   selector: 'home-page',
   templateUrl: 'home.page.html',
@@ -27,8 +23,13 @@ export class HomePage implements OnInit {
   colorcode: any;
   lat: number
   lng: number
+  geolocate = new mapboxgl.GeolocateControl({
+    positionOptions: {
+      enableHighAccuracy: true
+    },
+    trackUserLocation: true
 
-
+  })
 
   // data
   source: any;
@@ -43,9 +44,8 @@ export class HomePage implements OnInit {
   coordinates: Coordinates;
 
   ngOnInit() {
-    this.initializeMap()
-    console.log(this.mapService.markercolor)
 
+    this.initializeMap()
   }
 
   async openModal(item) {
@@ -54,7 +54,6 @@ export class HomePage implements OnInit {
     })
     return await modal.present();
   }
-
 
 
   private initializeMap() {
@@ -82,19 +81,23 @@ export class HomePage implements OnInit {
       center: [this.lng, this.lat]
     });
     // Add marker on map
-    this.marker = new mapboxgl.Marker({ "color": this.mapService.markercolor })
-      .setLngLat([this.lng, this.lat])
-      .addTo(this.map);
+
+    // this.marker = new mapboxgl.Marker({ "color": this.mapService.markercolor })
+    //   .setLngLat([this.lng, this.lat])
+    //   .addTo(this.map);
 
     /// Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
+
+    this.map.addControl(
+      this.geolocate
+    );
+    this.markerColor()
   }
 
   markerColor() {
-    this.marker.remove(this.marker);
-    this.marker = new mapboxgl.Marker({ "color": this.mapService.markercolor })
-      .setLngLat([this.lng, this.lat])
-      .addTo(this.map);
-    console.log("nyt ", this.mapService.markercolor)
+    setTimeout(() => {
+      this.geolocate.trigger()
+    }, 50);
   }
 }
