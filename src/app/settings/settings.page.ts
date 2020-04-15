@@ -10,12 +10,7 @@ import { HomePage } from '../home/home.page';
 
 export class SettingsPage {
 
-  markercolor: string
-
   constructor(private mapService: MapService,
     private homePage: HomePage) { }
 
-  save() {
-    this.mapService.color(this.markercolor);
-  }
 }

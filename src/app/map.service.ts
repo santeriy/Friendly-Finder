@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+import { AngularFirestore } from '@angular/fire/firestore';
+
 import * as mapboxgl from 'mapbox-gl';
 
 @Injectable({
@@ -9,23 +11,27 @@ import * as mapboxgl from 'mapbox-gl';
 })
 export class MapService {
 
-  markercolor: string
-
-  constructor(private geolocation: Geolocation) { 
+  constructor(private geolocation: Geolocation,
+    private db: AngularFirestore) {
 
     mapboxgl.accessToken = environment.mapbox.accessToken
+
+  }
+  
+  getUsers() { 
+    return this.db.collection('users').valueChanges();
   }
 
-  public getLocation(){
+  create_NewUser(userdata) {
+    return this.db.collection('users').add(userdata);
+  }
+
+ //map things
+  public getLocation() {
     return this.geolocation.getCurrentPosition();
   }
 
-  public watchPosition(){
+  public watchPosition() {
     return this.geolocation.watchPosition();
-  } 
-
-  public color(value){
-    this.markercolor = value;
-    console.log(this.markercolor);
   }
 }

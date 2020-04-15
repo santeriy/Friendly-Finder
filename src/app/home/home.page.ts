@@ -18,9 +18,8 @@ export class HomePage implements OnInit {
   map: mapboxgl.Map;
   marker: mapboxgl.Marker;
   // map-style
-  style = 'mapbox://styles/mapbox/streets-v11';
+  style = 'mapbox://styles/mooregrimm/ck8k40yzs0yz51iocd9pemxhc';
   // marker-color
-  colorcode: any;
   lat: number
   lng: number
   geolocate = new mapboxgl.GeolocateControl({
@@ -33,8 +32,13 @@ export class HomePage implements OnInit {
   // data
   source: any;
   markers: any;
-  markercolor: any;
+  markercolor = '#f54242';
   value: any;
+
+  items: Array<any> = [];
+  joku: any;
+  dblat: number;
+  dblng: number;
 
   constructor(private mapService: MapService,
     private modalController: ModalController) {
@@ -63,9 +67,8 @@ export class HomePage implements OnInit {
       this.lat = data.coords.latitude;
       this.lng = data.coords.longitude;
 
-      this.mapService.markercolor = this.colorcode;
-
       this.buildMap()
+      this.Createuserdata()
 
     }).catch((error) => {
       console.log(error);
@@ -80,16 +83,10 @@ export class HomePage implements OnInit {
       center: [this.lng, this.lat]
     });
 
-    // Add marker on map
-
-    // this.marker = new mapboxgl.Marker({ "color": this.mapService.markercolor })
-    //   .setLngLat([this.lng, this.lat])
-    //   .addTo(this.map);
-
     /// Add map controls
 
     this.map.addControl(new mapboxgl.NavigationControl());
-    
+
     /// Geolocate Control
     this.map.addControl(
       this.geolocate
@@ -101,5 +98,41 @@ export class HomePage implements OnInit {
     setTimeout(() => {
       this.geolocate.trigger()
     }, 50);
+
+    this.getUsers()
+  }
+
+  getUsers() {
+    this.mapService.getUsers().subscribe(
+      data => {
+        this.items = data;
+        console.log("ollaan homepage.ts", this.items)
+
+        for (let joku of this.items) {
+          this.dblat = joku.latitude
+          this.dblng = joku.longitude
+
+          this.marker = new mapboxgl.Marker({ "color": this.markercolor })
+            .setLngLat([this.dblng, this.dblat])
+            .addTo(this.map)
+        }
+      }
+    );
+  }
+
+  Createuserdata() {
+    
+    let userdata = {};
+    userdata['latitude'] = this.lat;
+    userdata['longitude'] = this.lng;
+  
+    this.mapService.create_NewUser(userdata).then(resp => {
+      this.lat = undefined;
+      this.lng = undefined;
+      console.log(resp);
+    })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }
