@@ -6,6 +6,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { MenuController } from '@ionic/angular';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -17,7 +19,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private menu: MenuController
   ) {
     this.initializeApp();
   }
@@ -29,9 +32,15 @@ export class AppComponent {
     });
   }
 
+  openEnd() {
+    this.menu.close();
+  }
+
 
   // Join room function
   async joinroom() {
+    
+
     console.log("spawning alert");
     const alert = await this.alertController.create({
       header: 'Enter room pass',

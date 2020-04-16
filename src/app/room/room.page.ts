@@ -7,18 +7,18 @@ import { ModalController } from '@ionic/angular';
 import { ChatPage } from '../modals/chat/chat.page';
 
 @Component({
-  selector: 'home-page',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  selector: 'app-room',
+  templateUrl: './room.page.html',
+  styleUrls: ['./room.page.scss'],
 })
-export class HomePage implements OnInit {
+export class RoomPage implements OnInit {
 
   showchat: boolean;
   /// default settings
   map: mapboxgl.Map;
   marker: mapboxgl.Marker;
   // map-style
-  style = 'mapbox://styles/mooregrimm/ck8k40yzs0yz51iocd9pemxhc';
+  style = 'mapbox://styles/mooregrimm/ck8pg261v0bpf1jn38qbpwimp';
   // marker-color
   lat: number
   lng: number
@@ -48,7 +48,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
 
-    this.initializeMap()
+    this.initializeRoomMap()
   }
 
   async openModal(item) {
@@ -58,7 +58,7 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
-  private initializeMap() {
+  private initializeRoomMap() {
     /// locate the user
 
     this.mapService.getLocation().then(data => {
@@ -66,7 +66,7 @@ export class HomePage implements OnInit {
       this.lat = data.coords.latitude;
       this.lng = data.coords.longitude;
 
-      this.buildMap()
+      this.buildRoomMap()
       // this.Createuserdata()
 
     }).catch((error) => {
@@ -74,57 +74,41 @@ export class HomePage implements OnInit {
     });
   }
 
-  buildMap() {
+  buildRoomMap() {
     this.map = new mapboxgl.Map({
-      container: 'map',
+      container: 'maproom',
       style: this.style,
       zoom: 13,
       center: [this.lng, this.lat]
     });
 
-    /// Add map controls
-    console.log("Käykö uudestaan?")
-    this.map.addControl(new mapboxgl.NavigationControl());
+    this.getUsers()
+  }
 
-    /// Geolocate Control
-    this.map.addControl(
-      this.geolocate
+  getUsers() {
+    this.mapService.getUsers().subscribe(
+      data => {
+        this.items = data;
+        console.log("ollaan roompage.ts", this.items)
+
+        for (let joku of this.items) {
+          this.dblat = joku.latitude
+          this.dblng = joku.longitude
+
+          this.marker = new mapboxgl.Marker({ "color": this.markercolor })
+            .setLngLat([this.dblng, this.dblat])
+            .addTo(this.map)
+        }
+      }
     );
-    this.triggerLocation()
   }
-
-  triggerLocation() {
-    setTimeout(() => {
-      this.geolocate.trigger()
-    }, 50);
-
-    // this.getUsers()
-  }
-
-  // getUsers() {
-  //   this.mapService.getUsers().subscribe(
-  //     data => {
-  //       this.items = data;
-  //       console.log("ollaan homepage.ts", this.items)
-
-  //       for (let joku of this.items) {
-  //         this.dblat = joku.latitude
-  //         this.dblng = joku.longitude
-
-  //         this.marker = new mapboxgl.Marker({ "color": this.markercolor })
-  //           .setLngLat([this.dblng, this.dblat])
-  //           .addTo(this.map)
-  //       }
-  //     }
-  //   );
-  // }
 
   // Createuserdata() {
-
+    
   //   let userdata = {};
   //   userdata['latitude'] = this.lat;
   //   userdata['longitude'] = this.lng;
-
+  
   //   this.mapService.create_NewUser(userdata).then(resp => {
   //     this.lat = undefined;
   //     this.lng = undefined;
@@ -134,4 +118,5 @@ export class HomePage implements OnInit {
   //       console.log(error);
   //     });
   // }
+
 }
