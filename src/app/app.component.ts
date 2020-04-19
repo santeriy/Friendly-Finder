@@ -40,7 +40,6 @@ export class AppComponent {
   // Join room function
   async joinroom() {
     
-
     console.log("spawning alert");
     const alert = await this.alertController.create({
       header: 'Enter room pass',

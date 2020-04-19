@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -18,24 +19,29 @@ import { SettingsPage } from './settings/settings.page';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { RoomPage } from './room/room.page';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule,
-     IonicModule.forRoot(),
-      AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase), 
-    AngularFirestoreModule],
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    ReactiveFormsModule,
+    FormsModule],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
     HomePage,
     SettingsPage,
+    RoomPage,
+
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
 
-export class AppModule {}
+export class AppModule { }

@@ -11,6 +11,9 @@ import * as mapboxgl from 'mapbox-gl';
 })
 export class MapService {
 
+  roomname: string;
+  username: string;
+
   constructor(private geolocation: Geolocation,
     private db: AngularFirestore) {
 
@@ -23,15 +26,26 @@ export class MapService {
   }
 
   create_NewUser(userdata) {
-    return this.db.collection('users').add(userdata);
+    return this.db.collection('users').doc(this.username).set(userdata);
   }
 
- //map things
+  create_NewRoom(roomdata) {
+    return this.db.collection('room').doc(this.roomname).set(roomdata);
+  }
+
   public getLocation() {
     return this.geolocation.getCurrentPosition();
   }
 
   public watchPosition() {
     return this.geolocation.watchPosition();
+  }
+
+  public roomName(value) {
+    this.roomname = value;
+  }
+
+  public userName(value) {
+    this.username = value;
   }
 }

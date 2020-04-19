@@ -1,38 +1,36 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button><ion-icon name="menu-outline"></ion-icon></ion-menu-button>
+      <ion-menu-button>
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-menu-button>
     </ion-buttons>
     <ion-title>Create room</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>Set username</ion-label>
-    <ion-input placeholder="Username"></ion-input>
-  </ion-item>
+  <form [formGroup]="formlogin">
+    <ion-item>
+      <ion-label>Set username</ion-label>
+      <ion-input [(ngModel)]="username" placeholder="Username" formControlName="user"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>New room name</ion-label>
-    <ion-input placeholder="Room name"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Set roomname</ion-label>
+      <ion-input [(ngModel)]="roomname" placeholder="Roomname" formControlName="room"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>New room name</ion-label>
-    <ion-input placeholder="Room name"></ion-input>
-  </ion-item>
-  
-  <ion-item>
-    <ion-label>New room pass</ion-label>
-    <ion-input value="yes" readonly></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Set password</ion-label>
+      <ion-input [(ngModel)]="password" placeholder="Password" formControlName="pass"></ion-input>
+    </ion-item>
+  </form>
 
-  <ion-button routerLink="/room">
+  <ion-button (click)="click()">
     <ion-label>Create</ion-label>
   </ion-button>
 
-  <br>
   <ion-button routerLink="/home" color="secondary">
     <ion-label>Back</ion-label>
   </ion-button>

@@ -6,6 +6,7 @@ import * as mapboxgl from 'mapbox-gl';
 import { ModalController } from '@ionic/angular';
 import { ChatPage } from '../modals/chat/chat.page';
 
+
 @Component({
   selector: 'app-room',
   templateUrl: './room.page.html',
@@ -33,7 +34,6 @@ export class RoomPage implements OnInit {
   source: any;
   markers: any;
   markercolor = '#f54242';
-  value: any;
 
   items: Array<any> = [];
   joku: any;
@@ -41,14 +41,14 @@ export class RoomPage implements OnInit {
   dblng: number;
 
   constructor(private mapService: MapService,
-    private modalController: ModalController) {
-  }
+    private modalController: ModalController) { }
 
   coordinates: Coordinates;
 
   ngOnInit() {
 
     this.initializeRoomMap()
+    
   }
 
   async openModal(item) {
@@ -68,7 +68,7 @@ export class RoomPage implements OnInit {
 
       this.buildRoomMap()
       // this.Createuserdata()
-
+      
     }).catch((error) => {
       console.log(error);
     });
@@ -83,17 +83,17 @@ export class RoomPage implements OnInit {
     });
 
     this.getUsers()
+    
   }
 
   getUsers() {
     this.mapService.getUsers().subscribe(
       data => {
         this.items = data;
-        console.log("ollaan roompage.ts", this.items)
 
         for (let joku of this.items) {
-          this.dblat = joku.latitude
-          this.dblng = joku.longitude
+          this.dblat = joku.geopoint.latitude
+          this.dblng = joku.geopoint.longitude
 
           this.marker = new mapboxgl.Marker({ "color": this.markercolor })
             .setLngLat([this.dblng, this.dblat])
@@ -102,21 +102,6 @@ export class RoomPage implements OnInit {
       }
     );
   }
-
-  // Createuserdata() {
-    
-  //   let userdata = {};
-  //   userdata['latitude'] = this.lat;
-  //   userdata['longitude'] = this.lng;
-  
-  //   this.mapService.create_NewUser(userdata).then(resp => {
-  //     this.lat = undefined;
-  //     this.lng = undefined;
-  //     console.log(resp);
-  //   })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
-
 }
+
+
