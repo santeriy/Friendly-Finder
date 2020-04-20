@@ -42,12 +42,17 @@ export class AppComponent {
     
     console.log("spawning alert");
     const alert = await this.alertController.create({
-      header: 'Enter room pass',
+      header: 'Enter room name',
       inputs: [
         {
-          name: 'password',
+          name: 'Username',
           type: 'text',
-          placeholder: 'password'
+          placeholder: 'Username'
+        },
+        {
+          name: 'Room name',
+          type: 'text',
+          placeholder: 'Room name'
         }
       ],
       buttons: [
@@ -62,7 +67,7 @@ export class AppComponent {
           text: 'Ok',
           handler: () => {
             console.log('Confirm Ok');
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl('/room');
           }
         }
       ]

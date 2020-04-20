@@ -83,7 +83,6 @@ export class HomePage implements OnInit {
     });
 
     /// Add map controls
-    console.log("Käykö uudestaan?")
     this.map.addControl(new mapboxgl.NavigationControl());
 
     /// Geolocate Control

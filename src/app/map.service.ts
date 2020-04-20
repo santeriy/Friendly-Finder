@@ -22,12 +22,17 @@ export class MapService {
   }
   
   getUsers() { 
-    return this.db.collection('users').valueChanges();
+    return this.db.collection('users').snapshotChanges();
   }
 
   create_NewUser(userdata) {
     return this.db.collection('users').doc(this.username).set(userdata);
   }
+
+  // update_User(username,userdata){
+  //   this.db.doc('users/' + username).update(userdata);
+  //   console.log("map",userdata)
+  // }
 
   create_NewRoom(roomdata) {
     return this.db.collection('room').doc(this.roomname).set(roomdata);

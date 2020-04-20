@@ -6,6 +6,8 @@ import * as mapboxgl from 'mapbox-gl';
 import { ModalController } from '@ionic/angular';
 import { ChatPage } from '../modals/chat/chat.page';
 
+import * as firebase from 'firebase/app'
+
 
 @Component({
   selector: 'app-room',
@@ -39,6 +41,7 @@ export class RoomPage implements OnInit {
   joku: any;
   dblat: number;
   dblng: number;
+  user: any;
 
   constructor(private mapService: MapService,
     private modalController: ModalController) { }
@@ -48,7 +51,7 @@ export class RoomPage implements OnInit {
   ngOnInit() {
 
     this.initializeRoomMap()
-    
+
   }
 
   async openModal(item) {
@@ -67,8 +70,7 @@ export class RoomPage implements OnInit {
       this.lng = data.coords.longitude;
 
       this.buildRoomMap()
-      // this.Createuserdata()
-      
+
     }).catch((error) => {
       console.log(error);
     });
@@ -83,25 +85,48 @@ export class RoomPage implements OnInit {
     });
 
     this.getUsers()
-    
   }
 
   getUsers() {
-    this.mapService.getUsers().subscribe(
-      data => {
-        this.items = data;
+    this.mapService.getUsers().subscribe(data => {
 
-        for (let joku of this.items) {
-          this.dblat = joku.geopoint.latitude
-          this.dblng = joku.geopoint.longitude
+      this.user = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          isEdit: false,
+          geopoint: e.payload.doc.data()['geopoint'],
+        };
+      })
 
-          this.marker = new mapboxgl.Marker({ "color": this.markercolor })
-            .setLngLat([this.dblng, this.dblat])
-            .addTo(this.map)
-        }
+      for (let joku of this.user) {
+
+        this.dblat = joku.geopoint.latitude
+        this.dblng = joku.geopoint.longitude
+        
+        this.marker = new mapboxgl.Marker({ "color": this.markercolor })
+          .setLngLat([this.dblng, this.dblat])
+          .addTo(this.map)
       }
-    );
+    });
   }
+
+  // getUsers() {
+  //   this.mapService.getUsers().subscribe(
+  //     data => {
+  //       this.items = data;
+
+  //       for (let joku of this.items) {
+  //         this.dblat = joku.geopoint.latitude
+  //         this.dblng = joku.geopoint.longitude
+  //         console.log("tätä",joku)
+
+  //         this.marker = new mapboxgl.Marker({ "color": this.markercolor })
+  //           .setLngLat([this.dblng, this.dblat])
+  //           .addTo(this.map)
+  //       }
+  //     }
+  //   );
+  // }
 }
 
 

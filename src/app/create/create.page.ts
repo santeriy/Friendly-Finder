@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from '../map.service';
+
 import * as firebase from 'firebase/app'
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+
 
 
 
@@ -68,7 +70,7 @@ export class CreatePage implements OnInit {
       console.log(error);
     });
   }
-
+  
 
   CreateUser() {
 
