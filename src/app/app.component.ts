@@ -8,6 +8,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { MenuController } from '@ionic/angular';
 
+import { ModalController } from '@ionic/angular';
+import { RoomsPage } from './modals/rooms/rooms.page';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -16,6 +19,7 @@ import { MenuController } from '@ionic/angular';
 export class AppComponent {
   constructor(
     private platform: Platform,
+    private modalController: ModalController,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
@@ -38,41 +42,11 @@ export class AppComponent {
 
 
   // Join room function
-  async joinroom() {
-    
-    console.log("spawning alert");
-    const alert = await this.alertController.create({
-      header: 'Enter room name',
-      inputs: [
-        {
-          name: 'Username',
-          type: 'text',
-          placeholder: 'Username'
-        },
-        {
-          name: 'Room name',
-          type: 'text',
-          placeholder: 'Room name'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: () => {
-            console.log('Confirm Ok');
-            this.router.navigateByUrl('/room');
-          }
-        }
-      ]
-    });
-    await alert.present();
+  async openModal(item) {
+    const modal = await this.modalController.create({
+      component: RoomsPage
+    })
+    return await modal.present();
   }
 
 

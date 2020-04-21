@@ -34,6 +34,10 @@ export class MapService {
   //   console.log("map",userdata)
   // }
 
+  getRooms() { 
+    return this.db.collection('room').snapshotChanges();
+  }
+
   create_NewRoom(roomdata) {
     return this.db.collection('room').doc(this.roomname).set(roomdata);
   }

@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'room',
     loadChildren: () => import('./room/room.module').then( m => m.RoomPageModule)
   },
+  {
+    path: 'rooms',
+    loadChildren: () => import('./modals/rooms/rooms.module').then( m => m.RoomsPageModule)
+  },
 
 ];
 

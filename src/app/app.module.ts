@@ -21,9 +21,12 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RoomPage } from './room/room.page';
 
+//rooms modal
+import { RoomsPage } from './modals/rooms/rooms.page';
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, RoomsPage],
+  entryComponents: [RoomsPage],
   imports: [BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,

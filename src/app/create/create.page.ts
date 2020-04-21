@@ -55,7 +55,6 @@ export class CreatePage implements OnInit {
     } else {
       alert('empty fields');
     }
-
   }
 
   private getLocation() {

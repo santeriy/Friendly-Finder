@@ -24,3 +24,19 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.wrong .alert-wrapper {
+
+    border-radius: 0px !important;
+
+    .alert-title.sc-ion-alert-ios {
+        font-size: 23px;
+        margin-bottom: -6%;
+    }
+
+    .alert-input.sc-ion-alert-ios {
+        text-align: center;
+        
+    }
+    
+  }
