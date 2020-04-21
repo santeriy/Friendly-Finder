@@ -36,7 +36,18 @@
 
     .alert-input.sc-ion-alert-ios {
         text-align: center;
-        
     }
-    
+  }
+
+  .alert .alert-wrapper {
+      border-radius: 0px !important;
+
+      .alert-title.sc-ion-alert-ios {
+        font-size: 23px;
+        margin-bottom: 7%;
+    }
+
+    .alert-sub-title.sc-ion-alert-ios {
+        font-size: 17px;
+    }
   }

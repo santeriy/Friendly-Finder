@@ -25,15 +25,21 @@ export class CreatePage implements OnInit {
 
   constructor(private mapService: MapService,
     public formBuilder: FormBuilder,
-    public router: Router,) {
+    public router: Router, ) {
     this.formlogin = this.formBuilder.group({
       user: new FormControl('', Validators.compose([
+        Validators.maxLength(25),
+        Validators.minLength(3),
         Validators.required
       ])),
       room: new FormControl('', Validators.compose([
+        Validators.maxLength(10),
+        Validators.minLength(4),
         Validators.required
       ])),
       pass: new FormControl('', Validators.compose([
+        Validators.maxLength(25),
+        Validators.minLength(4),
         Validators.required
       ]))
     });
@@ -47,11 +53,11 @@ export class CreatePage implements OnInit {
 
     let me = this;
     if (me.formlogin.valid) {
-    
-    this.router.navigate(['/room']);
-    this.CreateUser()
-    this.CreateRoom()
-    
+
+      this.router.navigate(['/room']);
+      this.CreateUser()
+      this.CreateRoom()
+
     } else {
       alert('empty fields');
     }
@@ -69,7 +75,7 @@ export class CreatePage implements OnInit {
       console.log(error);
     });
   }
-  
+
 
   CreateUser() {
 

@@ -58,6 +58,7 @@ export class RoomsPage implements OnInit {
   async showAlert(){
     const alert = await this.alertController.create({
       header: 'Wrong password',
+      cssClass: 'alert',
       subHeader: 'Try again',
       mode:'ios',
       buttons: [{
