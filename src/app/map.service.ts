@@ -13,6 +13,7 @@ export class MapService {
 
   roomname: string;
   username: string;
+  currentRoom: any;
 
   constructor(private geolocation: Geolocation,
     private db: AngularFirestore) {
@@ -23,6 +24,8 @@ export class MapService {
   
   getUsers() { 
     return this.db.collection('users').snapshotChanges();
+
+    // return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), '==', this.currentRoom.users)).snapshotChanges();
   }
 
   create_NewUser(userdata) {

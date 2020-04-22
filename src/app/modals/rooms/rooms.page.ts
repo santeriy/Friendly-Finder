@@ -16,7 +16,7 @@ export class RoomsPage implements OnInit {
   sub: any;
   room: any;
   items: Array<any> = [];
-  currentRoom: any;
+  
 
   constructor(private modalController: ModalController,
     public alertController: AlertController,
@@ -72,7 +72,7 @@ export class RoomsPage implements OnInit {
 
   async joinroom(room) {
     
-    this.currentRoom = room;
+    this.mapService.currentRoom = room;
     console.log("santeri",room)
     const alert = await this.alertController.create({
       header: room.id,
