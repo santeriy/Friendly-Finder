@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './create.page.html',
   styleUrls: ['./create.page.scss'],
 })
-export class CreatePage implements OnInit {
+export class CreatePage {
 
   username: string;
   password: string;
@@ -45,25 +45,20 @@ export class CreatePage implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.getLocation()
-  }
-
   click() {
 
     let me = this;
     if (me.formlogin.valid) {
 
       this.router.navigate(['/room']);
-      this.CreateUser()
-      this.CreateRoom()
+      this.getLocation()
 
     } else {
       alert('empty fields');
     }
   }
 
-  private getLocation() {
+    getLocation() {
     /// locate the user
 
     this.mapService.getLocation().then(data => {
@@ -71,6 +66,8 @@ export class CreatePage implements OnInit {
       this.lat = data.coords.latitude;
       this.lng = data.coords.longitude;
 
+      this.CreateUser()
+      this.CreateRoom()
     }).catch((error) => {
       console.log(error);
     });

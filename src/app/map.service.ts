@@ -17,6 +17,7 @@ export class MapService {
   username: string;
   currentRoom: any;
 
+
   constructor(private geolocation: Geolocation,
     private db: AngularFirestore) {
 
@@ -33,10 +34,10 @@ export class MapService {
     return this.db.collection('users').doc(this.username).set(userdata);
   }
 
-  // update_User(username,userdata){
-  //   this.db.doc('users/' + username).update(userdata);
-  //   console.log("map",userdata)
-  // }
+  add_Room(room){
+
+    return this.db.collection('room').doc(this.currentRoom.id).update(room);
+  }
 
   getRooms() { 
     return this.db.collection('room').snapshotChanges();
