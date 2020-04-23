@@ -10,6 +10,7 @@ import { MenuController } from '@ionic/angular';
 
 import { ModalController } from '@ionic/angular';
 import { RoomsPage } from './modals/rooms/rooms.page';
+import { MapService } from './map.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,7 @@ export class AppComponent {
     private modalController: ModalController,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router,
+    private mapService: MapService,
     public alertController: AlertController,
     private menu: MenuController
   ) {
@@ -40,6 +41,11 @@ export class AppComponent {
     this.menu.close();
   }
 
+  openEndTitle() {
+    this.menu.close();
+    this.mapService.currentRoom = null;
+  }
+
 
   // Join room function
   async openModal(item) {
@@ -48,6 +54,4 @@ export class AppComponent {
     })
     return await modal.present();
   }
-
-
 }

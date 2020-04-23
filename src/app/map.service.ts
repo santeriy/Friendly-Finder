@@ -6,6 +6,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import * as mapboxgl from 'mapbox-gl';
 
+import * as firebase from 'firebase/app'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,9 +25,9 @@ export class MapService {
   }
   
   getUsers() { 
-    return this.db.collection('users').snapshotChanges();
-
-    // return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), '==', this.currentRoom.users)).snapshotChanges();
+    // return this.db.collection('users').snapshotChanges();
+    
+    return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), 'in', this.currentRoom.users)).snapshotChanges();
   }
 
   create_NewUser(userdata) {
