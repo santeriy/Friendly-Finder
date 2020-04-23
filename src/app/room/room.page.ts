@@ -83,7 +83,7 @@ export class RoomPage implements OnInit {
       zoom: 13,
       center: [this.lng, this.lat]
     });
-
+    this.map.addControl(new mapboxgl.NavigationControl());
     this.getUsers()
   }
 

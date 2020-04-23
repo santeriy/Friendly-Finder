@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
-import { ChatPage } from '../modals/chat/chat.page';
+
 
 @NgModule({
   imports: [
@@ -18,7 +18,6 @@ import { ChatPage } from '../modals/chat/chat.page';
       }
     ])
   ],
-  declarations: [HomePage, ChatPage],
-  entryComponents: [ChatPage]
+  declarations: [HomePage]
 })
 export class HomePageModule {}

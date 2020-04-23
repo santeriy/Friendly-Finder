@@ -51,13 +51,6 @@ export class HomePage implements OnInit {
     this.initializeMap()
   }
 
-  async openModal(item) {
-    const modal = await this.modalController.create({
-      component: ChatPage
-    })
-    return await modal.present();
-  }
-
   private initializeMap() {
     /// locate the user
 

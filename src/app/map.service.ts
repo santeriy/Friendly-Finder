@@ -26,7 +26,6 @@ export class MapService {
   
   getUsers() { 
     // return this.db.collection('users').snapshotChanges();
-    
     return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), 'in', this.currentRoom.users)).snapshotChanges();
   }
 
