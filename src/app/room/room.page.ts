@@ -49,9 +49,7 @@ export class RoomPage implements OnInit {
   coordinates: Coordinates;
 
   ngOnInit() {
-
     this.initializeRoomMap()
-
   }
 
   async openModal(item) {
@@ -63,7 +61,6 @@ export class RoomPage implements OnInit {
 
   private initializeRoomMap() {
     /// locate the user
-
     this.mapService.getLocation().then(data => {
       this.coordinates = data.coords;
       this.lat = data.coords.latitude;
@@ -97,7 +94,7 @@ export class RoomPage implements OnInit {
           geopoint: e.payload.doc.data()['geopoint'],
         };
       })
-
+      
       for (let joku of this.user) {
 
         this.dblat = joku.geopoint.latitude

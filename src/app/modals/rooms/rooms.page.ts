@@ -200,5 +200,7 @@ export class RoomsPage implements OnInit {
 
     this.mapService.add_Room(room)
   }
+
+  
 }
 
