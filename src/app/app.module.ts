@@ -23,6 +23,7 @@ import { RoomPage } from './room/room.page';
 
 //rooms modal
 import { RoomsPage } from './modals/rooms/rooms.page';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @NgModule({
   declarations: [AppComponent, RoomsPage],
@@ -41,6 +42,7 @@ import { RoomsPage } from './modals/rooms/rooms.page';
     HomePage,
     SettingsPage,
     RoomPage,
+    NativeStorage,
 
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

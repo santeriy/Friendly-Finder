@@ -16,6 +16,8 @@ export class MapService {
   roomname: string;
   username: string;
   currentRoom: any;
+  myRoom: any;
+  myusers;
 
 
   constructor(private geolocation: Geolocation,
@@ -30,12 +32,22 @@ export class MapService {
     return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), 'in', this.currentRoom.users)).snapshotChanges();
   }
 
+  getmyUsers() { 
+    // return this.db.collection('users').snapshotChanges();
+    console.log(this.myusers)
+    return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), 'in', this.myusers)).snapshotChanges();
+  }
+
+  getmyroomLocations() {
+    console.log("tänne",this.myRoom)
+    return this.db.collection('room/', ref => ref.where(firebase.firestore.FieldPath.documentId(),'==' , this.myRoom)).snapshotChanges();
+  }
+
   create_NewUser(userdata) {
     return this.db.collection('users').doc(this.username).set(userdata);
   }
 
   add_Room(room){
-
     return this.db.collection('room').doc(this.currentRoom.id).update(room);
   }
 
@@ -61,5 +73,9 @@ export class MapService {
 
   public userName(value) {
     this.username = value;
+  }
+
+  public myUser(value) {
+    this.myusers = value;
   }
 }

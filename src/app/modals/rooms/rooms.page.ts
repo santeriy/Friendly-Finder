@@ -3,6 +3,7 @@ import { ModalController, MenuController } from '@ionic/angular';
 import { MapService } from 'src/app/map.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import * as firebase from 'firebase/app'
 
@@ -31,6 +32,7 @@ export class RoomsPage implements OnInit {
   constructor(private modalController: ModalController,
     public alertController: AlertController,
     private router: Router,
+    private nativeStorage: NativeStorage,
     private menu: MenuController,
     private mapService: MapService) { }
 
@@ -142,6 +144,11 @@ export class RoomsPage implements OnInit {
               this.mapService.userName(data.username);
               let username = data.username;
               this.UpdateRoom(username)
+              this.nativeStorage.setItem('myitem', { property: false })
+                .then(
+                  () => console.log('Stored item!'),
+                  error => console.error('Error storing item', error)
+                );
             }
 
             else {
@@ -184,12 +191,10 @@ export class RoomsPage implements OnInit {
       .catch(error => {
         console.log(error);
       });
-    
+
   }
 
   UpdateRoom(username) {
-
-    // this.mapService.roomName(this.roomname);
 
     let array = this.mapService.currentRoom.users
     array.push(username)
@@ -201,6 +206,6 @@ export class RoomsPage implements OnInit {
     this.mapService.add_Room(room)
   }
 
-  
+
 }
 

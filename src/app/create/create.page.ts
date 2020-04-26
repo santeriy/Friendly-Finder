@@ -5,6 +5,8 @@ import * as firebase from 'firebase/app'
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+
 
 
 
@@ -24,6 +26,7 @@ export class CreatePage {
   coordinates: Coordinates;
 
   constructor(private mapService: MapService,
+    private nativeStorage: NativeStorage,
     public formBuilder: FormBuilder,
     public router: Router, ) {
     this.formlogin = this.formBuilder.group({
@@ -53,12 +56,20 @@ export class CreatePage {
       this.router.navigate(['/room']);
       this.getLocation()
 
+      this.nativeStorage.setItem('myitem', { property: true})
+        .then(
+          () => console.log('Stored item!'),
+          error => console.error('Error storing item', error)
+        );
+
+      this.mapService.myRoom = this.roomname
+
     } else {
       alert('empty fields');
     }
   }
 
-    getLocation() {
+  getLocation() {
     /// locate the user
 
     this.mapService.getLocation().then(data => {
