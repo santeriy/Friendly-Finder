@@ -42,6 +42,8 @@ export class RoomPage implements OnInit {
   dblat: number;
   dblng: number;
   user: any;
+  usernum = 0;
+  id: string;
 
   constructor(private mapService: MapService,
     private modalController: ModalController) { }
@@ -95,14 +97,21 @@ export class RoomPage implements OnInit {
         };
       })
       
-      for (let joku of this.user) {
 
+
+      for (let joku of this.user) {
+        
+        
         this.dblat = joku.geopoint.latitude
         this.dblng = joku.geopoint.longitude
-        
+
+        console.log("paskaakos",this.user[this.usernum])
+        this.id = joku.id;
         this.marker = new mapboxgl.Marker({ "color": this.markercolor })
-          .setLngLat([this.dblng, this.dblat])
-          .addTo(this.map)
+        .setLngLat([this.dblng, this.dblat])
+        .setPopup(new mapboxgl.Popup()//add popups
+        .setHTML('<h4>' + this.id + '</h4>'))
+        .addTo(this.map)
       }
     });
   }
