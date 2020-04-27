@@ -27,6 +27,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 //theme change storage
 import { IonicStorageModule } from '@ionic/storage';
+import { ThemeService } from './theme.service';
 
 @NgModule({
   declarations: [AppComponent, RoomsPage],
@@ -45,6 +46,7 @@ import { IonicStorageModule } from '@ionic/storage';
     Geolocation,
     HomePage,
     SettingsPage,
+    ThemeService,
     RoomPage,
     NativeStorage,
 

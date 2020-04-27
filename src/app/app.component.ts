@@ -12,6 +12,7 @@ import { ModalController } from '@ionic/angular';
 import { RoomsPage } from './modals/rooms/rooms.page';
 import { MapService } from './map.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -46,7 +47,33 @@ export class AppComponent {
     this.mapService.currentRoom = null;
   }
 
+  exitApp(){
+    navigator['app'].exitApp()
+ }
 
+ async presentAlertConfirm() {
+  const alert = await this.alertController.create({
+    message: '<strong>Are you sure you want to quit?</strong>',
+    cssClass: 'alerttext',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          console.log('Confirm Cancel');
+        }
+      }, {
+        text: 'Okay',
+        handler: () => {
+          this.exitApp()
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+}
   // Join room function
   async openModal(item) {
     const modal = await this.modalController.create({

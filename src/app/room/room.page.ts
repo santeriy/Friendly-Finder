@@ -8,7 +8,9 @@ import { ChatPage } from '../modals/chat/chat.page';
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
-import * as firebase from 'firebase/app'
+//Theme change and memory
+import { ThemeService } from '../theme.service';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -50,6 +52,7 @@ export class RoomPage implements OnInit {
 
   constructor(private mapService: MapService,
     private nativeStorage: NativeStorage,
+    private theme: ThemeService,
     private modalController: ModalController) { }
 
   coordinates: Coordinates;
@@ -80,6 +83,7 @@ export class RoomPage implements OnInit {
   }
 
   buildRoomMap() {
+    
     this.map = new mapboxgl.Map({
       container: 'maproom',
       style: this.style,

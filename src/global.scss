@@ -26,12 +26,13 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .wrong .alert-wrapper {
-
+ 
     border-radius: 0px !important;
-
+    background-color: var(--ion-background-color);
     .alert-title.sc-ion-alert-ios {
         font-size: 23px;
         margin-bottom: -6%;
+        color: black;
     }
 
     .alert-input.sc-ion-alert-ios {
@@ -58,3 +59,12 @@
     color: var(--ion-text-color) !important;
   
 }
+
+.alerttext {
+    
+    .alert-message.sc-ion-alert-md {
+        font-size: 15px;
+        text-align: center;
+    }
+}
+

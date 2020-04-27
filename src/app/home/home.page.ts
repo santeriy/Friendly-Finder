@@ -9,6 +9,7 @@ import { ModalController } from '@ionic/angular';
 import { ThemeService } from '../theme.service';
 import { Storage } from '@ionic/storage';
 
+
 @Component({
   selector: 'home-page',
   templateUrl: 'home.page.html',
@@ -56,9 +57,12 @@ export class HomePage implements OnInit {
     this.initializeMap()
   }
 
-  private initializeMap() {
-    /// locate the user
+  reloadPage(){
+    window.location.reload()
+  }
 
+  initializeMap() {
+    
     this.mapService.getLocation().then(data => {
       this.coordinates = data.coords;
       this.lat = data.coords.latitude;

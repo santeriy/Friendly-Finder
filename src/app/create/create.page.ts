@@ -71,7 +71,7 @@ export class CreatePage {
       this.mapService.myRoom = this.roomname
 
     } else {
-      alert('empty fields');
+      alert('Check fields');
     }
   }
 

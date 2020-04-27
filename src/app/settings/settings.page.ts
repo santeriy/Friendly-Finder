@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { MapService } from '../map.service';
 import { HomePage } from '../home/home.page';
+import { Router } from '@angular/router';
 
 //Theme change and memory
 import { ThemeService } from '../theme.service';
 import { Storage } from '@ionic/storage';
+
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -21,6 +24,7 @@ export class SettingsPage {
   constructor(private mapService: MapService,
     private homePage: HomePage,
     private theme: ThemeService,
+    public navCtrl: NavController,
     private storage: Storage) { }
 
 
@@ -30,9 +34,8 @@ export class SettingsPage {
 
   click() {
     this.storage.set('maptheme', this.maptheme);
-    console.log("juu",this.maptheme)
+    this.homePage.reloadPage();
   }
-
 }
 
 const themes = {
@@ -56,7 +59,5 @@ const themes = {
     medium: '#BCC2C7',
     dark: '#F7F7FF',
     light: '#262626'
-
   }
-
 };
