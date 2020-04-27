@@ -24,11 +24,15 @@ import { RoomPage } from './room/room.page';
 //rooms modal
 import { RoomsPage } from './modals/rooms/rooms.page';
 
+//theme change storage
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [AppComponent, RoomsPage],
   entryComponents: [RoomsPage],
   imports: [BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

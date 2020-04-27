@@ -6,6 +6,10 @@ import * as mapboxgl from 'mapbox-gl';
 import { ModalController } from '@ionic/angular';
 import { ChatPage } from '../modals/chat/chat.page';
 
+//Theme change service and memory
+import { ThemeService } from '../theme.service';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'home-page',
   templateUrl: 'home.page.html',
@@ -41,7 +45,9 @@ export class HomePage implements OnInit {
   dblng: number;
 
   constructor(private mapService: MapService,
-    private modalController: ModalController) {
+    private modalController: ModalController,
+    private theme: ThemeService,
+    private storage: Storage) {
   }
 
   coordinates: Coordinates;
