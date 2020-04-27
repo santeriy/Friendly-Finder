@@ -26,12 +26,13 @@
       <ion-input [(ngModel)]="password" placeholder="Password" type="password" formControlName="pass"></ion-input>
     </ion-item>
   </form>
-
-  <ion-button (click)="click()">
+  <ion-item lines="none">
+  <ion-button slot="end" size="medium" class="button" (click)="click()" color="secondary">
     <ion-label>Create</ion-label>
   </ion-button>
 
-  <ion-button routerLink="/home" color="secondary">
+  <ion-button slot="start" size="medium" routerLink="/home" color="secondary">
     <ion-label>Back</ion-label>
   </ion-button>
+</ion-item>
 </ion-content>

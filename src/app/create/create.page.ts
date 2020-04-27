@@ -7,6 +7,10 @@ import { Router } from '@angular/router';
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
+//Theme change service and memory
+import { ThemeService } from '../theme.service';
+import { Storage } from '@ionic/storage';
+
 
 
 
@@ -26,6 +30,8 @@ export class CreatePage {
   coordinates: Coordinates;
 
   constructor(private mapService: MapService,
+    private theme: ThemeService,
+    private storage: Storage,
     private nativeStorage: NativeStorage,
     public formBuilder: FormBuilder,
     public router: Router, ) {

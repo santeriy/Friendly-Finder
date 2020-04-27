@@ -10,13 +10,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-title class="settings" size="large">Theme settings</ion-title>
   <ion-item>
-    <ion-label>Theme</ion-label>
-    <ion-select placeholder="Select One">
-      <ion-select-option value="default">Default theme</ion-select-option>
-      <ion-select-option value="dark">Dark theme</ion-select-option>
-      <ion-select-option value="accessibility">Accessible theme</ion-select-option>
+    <ion-label>Map Theme</ion-label>
+    <ion-select  [(ngModel)]="maptheme" placeholder="Select One">
+      <ion-select-option value="mapbox://styles/mooregrimm/ck8k40yzs0yz51iocd9pemxhc">Dark urban</ion-select-option>
+      <ion-select-option value="mapbox://styles/n8rajo00/ck8oc5vrz0fco1irucscrh8b9">Satellite</ion-select-option>
+      <ion-select-option value="mapbox://styles/mooregrimm/ck8pg261v0bpf1jn38qbpwimp">Nature light</ion-select-option>
+      <ion-select-option value="mapbox://styles/n8rajo00/ck8oezis73ity1iodrz1xt8jt">Default theme</ion-select-option>
     </ion-select>
   </ion-item>
 
@@ -29,9 +29,11 @@
       <ion-select-option value="#FFFFFF">White</ion-select-option>
     </ion-select>
   </ion-item>
-
-  <ion-title class="settings" size="large">Location settings</ion-title>
-
+  <ion-item lines="full">
+  <ion-label>Theme</ion-label>
+    <ion-button color="secondary" (click)="changeTheme('default')">default</ion-button>
+    <ion-button  color="secondary" (click)="changeTheme('nightmode')">nightmode</ion-button>
+  </ion-item>
   <ion-item>
     <ion-label>Location update interval</ion-label>
     <ion-select placeholder="Select One">
@@ -43,7 +45,7 @@
     </ion-select>
   </ion-item>
 
-  <ion-button class="button" color="dark" (click)="save()">
+  <ion-button (click)="click()" class="settingsbutton" expand="block" routerLink="/home" color="secondary">
     <ion-label>Save</ion-label>
   </ion-button>
 

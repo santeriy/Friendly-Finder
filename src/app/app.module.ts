@@ -25,11 +25,15 @@ import { RoomPage } from './room/room.page';
 import { RoomsPage } from './modals/rooms/rooms.page';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
+//theme change storage
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [AppComponent, RoomsPage],
   entryComponents: [RoomsPage],
   imports: [BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

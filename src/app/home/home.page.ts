@@ -4,7 +4,10 @@ import { MapService } from '../map.service';
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { ModalController } from '@ionic/angular';
-import { ChatPage } from '../modals/chat/chat.page';
+
+//Theme change service and memory
+import { ThemeService } from '../theme.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'home-page',
@@ -18,7 +21,8 @@ export class HomePage implements OnInit {
   map: mapboxgl.Map;
   marker: mapboxgl.Marker;
   // map-style
-  style = 'mapbox://styles/mooregrimm/ck8k40yzs0yz51iocd9pemxhc';
+
+  style: any;
   // marker-color
   lat: number
   lng: number
@@ -41,7 +45,8 @@ export class HomePage implements OnInit {
   dblng: number;
 
   constructor(private mapService: MapService,
-    private modalController: ModalController) {
+    private theme: ThemeService,
+    private storage: Storage) {
   }
 
   coordinates: Coordinates;
@@ -68,21 +73,36 @@ export class HomePage implements OnInit {
   }
 
   buildMap() {
-    this.map = new mapboxgl.Map({
-      container: 'map',
-      style: this.style,
-      zoom: 13,
-      center: [this.lng, this.lat]
+
+    this.storage.get('maptheme').then(maptheme => {
+
+      if (maptheme == null) {
+        this.map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/n8rajo00/ck8oezis73ity1iodrz1xt8jt',
+          zoom: 13,
+          center: [this.lng, this.lat]
+        });
+      } else {
+        console.log("löytyi muuta")
+
+        this.map = new mapboxgl.Map({
+          container: 'map',
+          style: maptheme,
+          zoom: 13,
+          center: [this.lng, this.lat]
+        });
+      }
+
+      /// Add map controls
+      this.map.addControl(new mapboxgl.NavigationControl());
+
+      /// Geolocate Control
+      this.map.addControl(
+        this.geolocate
+      );
+      this.triggerLocation()
     });
-
-    /// Add map controls
-    this.map.addControl(new mapboxgl.NavigationControl());
-
-    /// Geolocate Control
-    this.map.addControl(
-      this.geolocate
-    );
-    this.triggerLocation()
   }
 
   triggerLocation() {

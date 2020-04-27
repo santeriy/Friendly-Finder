@@ -23,6 +23,6 @@
     margin-right: 1%;
 }
 
-ion-content{
-  --background: rgb(241, 241, 241);
+.card {
+  color: var(--ion-text-color) !important;
 }

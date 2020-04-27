@@ -7,6 +7,10 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import * as firebase from 'firebase/app'
 
+//Theme change service and memory
+import { ThemeService } from '../../theme.service';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.page.html',
@@ -32,6 +36,8 @@ export class RoomsPage implements OnInit {
   constructor(private modalController: ModalController,
     public alertController: AlertController,
     private router: Router,
+    private theme: ThemeService,
+    private storage: Storage,
     private nativeStorage: NativeStorage,
     private menu: MenuController,
     private mapService: MapService) { }
