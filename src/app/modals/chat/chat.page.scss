@@ -1,8 +1,83 @@
 .noScroll {
     overflow: hidden;
-    }
-    
-    #chat {
+}
+
+#chat {
+    height: 99%;
+    width: 100%;
+}
+
+.chatbox_body {
     height: 100%;
     width: 100%;
-    }
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 10px 10px 20px;
+    margin-bottom: -60px;
+    padding-bottom: 80px;
+}
+
+.chatbox_body .message {
+    display: block;
+    width: auto;
+    margin: 5px;
+    align-self: flex-start;
+    flex-direction: row;
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.chatbox_body .message.receive {
+    padding-left: 3%;
+}
+
+.chatbox_body .message.receive .message_text {
+    margin-left: 0;
+    padding: 10px;
+    border-radius: 3px;
+    background: #272727;
+    color: white;
+}
+
+.chatbox_body .message.sender {
+    color: #fff;
+    align-self: flex-end;
+    padding-right: 3%;
+}
+
+.chatbox_body .message.sender .message_text {
+    margin-right: 0;
+    background: #444444;
+    padding: 10px;
+    border-radius: 3px;
+    z-index: 99;
+}
+
+.chatbox_input {
+    display: flex;
+    width: 100%;
+    height: 60px;
+}
+
+.chatbox_input ion-input {
+    border-top: 1px solid;
+    border-color: rgb(0, 0, 0);
+    flex: 12;
+    padding: 1em 2em;
+    outline: none;
+    padding-left: 3% !important;
+}
+
+.chatbox_input button {
+    outline: none;
+    border: 0;
+    flex: 1;
+    background: #272727;
+    color: #fff;
+    border: 1px solid;
+    border-color: rgb(0, 0, 0);
+}
+
+.chatbox_input button {
+    color: #fff;
+}

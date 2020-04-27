@@ -10,5 +10,29 @@
 </ion-header>
 
 <ion-content class="noScroll">
-  <img id="chat" src="../../assets/images/chat.jpg">
+  <div class='chatbox_body'>
+
+    <div class='message sender'>
+      <div class='message_text'>Ok</div>
+    </div>
+    <div class='message receive'>
+      <div class='message_text'>I see you now! I will be there soon.</div>
+    </div>
+
+    <!-- <div class="message receive">
+          <p class='message_text'>juu</p>
+          <p class='message_user'>jaa</p>
+      </div> -->
+
+    <div class='message sender'>
+      <div class='message_text'>Where are you?
+      </div>
+    </div>
+  </div>
+  <div class='chatbox_input'>
+    <ion-input [(ngModel)]="msginput" placeholder='Type something here'></ion-input>
+    <button (click)="send()">
+      <ion-icon name="send"></ion-icon>
+    </button>
+  </div>
 </ion-content>

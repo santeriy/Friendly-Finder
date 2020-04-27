@@ -6,8 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { ChatPageRoutingModule } from './chat-routing.module';
 
-import { ChatPage } from './chat.page';
-
 @NgModule({
   imports: [
     CommonModule,
