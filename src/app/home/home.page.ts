@@ -48,28 +48,28 @@ export class HomePage implements OnInit {
     this.initializeMap()
   }
 
+  // Reloading the map
   reloadPage() {
     window.location.reload()
   }
-
+  // get coordinates
   initializeMap() {
-
     this.mapService.getLocation().then(data => {
       this.coordinates = data.coords;
       this.lat = data.coords.latitude;
       this.lng = data.coords.longitude;
 
       this.buildMap()
-      // this.Createuserdata()
-
+ 
     }).catch((error) => {
       console.log(error);
     });
   }
 
   buildMap() {
+    // Read from stock whether the user has changed the style of the map.
     this.storage.get('maptheme').then(maptheme => {
-
+      // If localstorage is empty, load the default map.
       if (maptheme == null) {
         this.map = new mapboxgl.Map({
           container: 'map',
@@ -78,6 +78,7 @@ export class HomePage implements OnInit {
           center: [this.lng, this.lat]
         });
       } else {
+        // If the local storage is not empty. Reads map style from local storage.
         this.map = new mapboxgl.Map({
           container: 'map',
           style: maptheme,

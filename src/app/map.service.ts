@@ -26,15 +26,17 @@ export class MapService {
     mapboxgl.accessToken = environment.mapbox.accessToken
 
   }
-  
+  /**
+     * Get current room users from users collection
+     *
+     * @param       array     users
+     * @return      array (resultset or single row)
+     */
   getUsers() { 
-    // return this.db.collection('users').snapshotChanges();
     return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), 'in', this.currentRoom.users)).snapshotChanges();
   }
 
   getmyUsers() { 
-    // return this.db.collection('users').snapshotChanges();
-    console.log(this.myusers)
     return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), 'in', this.myusers)).snapshotChanges();
   }
 
