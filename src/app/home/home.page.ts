@@ -1,3 +1,9 @@
+/**
+ * Homepage
+ * 
+ * @ author Santeri Yritys & Joonas Joki
+ */
+
 import { Coordinates } from '@ionic-native/geolocation/ngx';
 import { MapService } from '../map.service';
 

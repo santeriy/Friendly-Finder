@@ -1,3 +1,9 @@
+/**
+ * Roompage
+ * 
+ * @ author Santeri Yritys & Joonas Joki
+ */
+
 import { Coordinates } from '@ionic-native/geolocation/ngx';
 import { MapService } from '../map.service';
 
@@ -7,9 +13,6 @@ import { ModalController } from '@ionic/angular';
 import { ChatPage } from '../modals/chat/chat.page';
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-
-import * as firebase from 'firebase/app'
-
 
 @Component({
   selector: 'app-room',
@@ -101,7 +104,7 @@ export class RoomPage implements OnInit {
         alert(error);
       };
   }
-
+  // Get users from firebase. This function is used when joining room.
   getUsers() {
     this.mapService.getUsers().subscribe(data => {
 
@@ -113,12 +116,13 @@ export class RoomPage implements OnInit {
         };
       })
 
+      // Loop every user from this.user array
       for (let joku of this.user) {
 
         this.dblat = joku.geopoint.latitude
         this.dblng = joku.geopoint.longitude
         this.id = joku.id;
-
+        // Draw a marker for each user
         this.marker = new mapboxgl.Marker({ "color": this.markercolor })
           .setLngLat([this.dblng, this.dblat])
           .setPopup(new mapboxgl.Popup()//add popups
@@ -128,10 +132,9 @@ export class RoomPage implements OnInit {
     });
   }
 
+  // Get myroom users from database. This function is used when creating room.
   myroomUsers() {
-
     this.mapService.getmyroomLocations().subscribe(data => {
-
       this.user = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -140,21 +143,18 @@ export class RoomPage implements OnInit {
           users: e.payload.doc.data()['users'],
         };
       })
-
-      console.log("undefined", this.user)
-
+      // Loop room from this.user array
       for (let joku of this.user) {
         this.users = joku.users;
       }
-      console.log(this.users)
       this.mapService.myUser(this.users);
       this.getmyroomLocations()
     });
   }
 
+  // Get myroom user locations. This function is used when creating room.
   getmyroomLocations() {
     this.mapService.getmyUsers().subscribe(data => {
-
       this.user = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -162,13 +162,12 @@ export class RoomPage implements OnInit {
           geopoint: e.payload.doc.data()['geopoint'],
         };
       })
-
+      // Loop every user from this.user array
       for (let joku of this.user) {
-
         this.dblat = joku.geopoint.latitude
         this.dblng = joku.geopoint.longitude
         this.id = joku.id;
-
+        // Draw a marker for each user
         this.marker = new mapboxgl.Marker({ "color": this.markercolor })
           .setLngLat([this.dblng, this.dblat])
           .setPopup(new mapboxgl.Popup()//add popups

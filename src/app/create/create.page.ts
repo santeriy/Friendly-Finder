@@ -1,3 +1,9 @@
+/**
+ * Createpage
+ * 
+ * @ author Santeri Yritys & Joonas Joki
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { MapService } from '../map.service';
 import * as firebase from 'firebase/app'

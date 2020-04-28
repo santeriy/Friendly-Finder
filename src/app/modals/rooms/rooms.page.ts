@@ -1,3 +1,9 @@
+/**
+ * Roomspage
+ * 
+ * @ author Santeri Yritys & Joonas Joki
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { ModalController, MenuController } from '@ionic/angular';
 import { MapService } from 'src/app/map.service';
@@ -50,25 +56,6 @@ export class RoomsPage implements OnInit {
     this.getRooms()
     // this.initializeItems();
   }
-
-  // initializeItems(){
-  //   this.items = this.copyItems;
-  //   }
-
-  //   getItems(ev: any) {
-  //   // Reset items back to all of the items
-  //   this.initializeItems();
-
-  //   // set val to the value of the searchbar
-  //   const val = ev.target.value;
-
-  //   // if the value is an empty string don't filter the items
-  //   if (val && val.trim() != '') {
-  //       this.items = this.items.filter((item) => {
-  //       return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);      
-  //   })
-  //   }
-  //   }
 
   getRooms() {
     this.mapService.getRooms().subscribe(data => {
