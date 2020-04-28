@@ -67,7 +67,7 @@ export class HomePage implements OnInit {
   }
 
   buildMap() {
-    // Read from stock whether the user has changed the style of the map.
+    // Read from local storage whether the user has changed the style of the map.
     this.storage.get('maptheme').then(maptheme => {
       // If localstorage is empty, load the default map.
       if (maptheme == null) {

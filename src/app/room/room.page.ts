@@ -18,27 +18,25 @@ import * as firebase from 'firebase/app'
 })
 export class RoomPage implements OnInit {
 
-  showchat: boolean;
-  /// default settings
+
+  /// map settings
   map: mapboxgl.Map;
   marker: mapboxgl.Marker;
-  // map-style
-  style = 'mapbox://styles/mooregrimm/ck8pg261v0bpf1jn38qbpwimp';
-  // marker-color
-  lat: number
-  lng: number
   geolocate = new mapboxgl.GeolocateControl({
     positionOptions: {
       enableHighAccuracy: true
     },
     trackUserLocation: true
   })
-
-  // data
+  // map-style
+  style = 'mapbox://styles/mooregrimm/ck8pg261v0bpf1jn38qbpwimp';
+  // global variables
+  showchat: boolean;
+  lat: number
+  lng: number
   source: any;
   markers: any;
   markercolor = '#f54242';
-
   items: Array<any> = [];
   joku: any;
   dblat: number;
@@ -57,7 +55,7 @@ export class RoomPage implements OnInit {
   ngOnInit() {
     this.initializeRoomMap()
   }
-
+  // Chat modal
   async openModal(item) {
     const modal = await this.modalController.create({
       component: ChatPage
@@ -87,7 +85,7 @@ export class RoomPage implements OnInit {
       center: [this.lng, this.lat]
     });
     this.map.addControl(new mapboxgl.NavigationControl());
-
+    // Read from local storage is user joined the room or made a new room.
     this.nativeStorage.getItem('myitem').then
       ((data) => {
         if (data.property == true) {

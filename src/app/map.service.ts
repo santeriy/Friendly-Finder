@@ -32,28 +32,28 @@ export class MapService {
      * @param       array     users
      * @return      array (resultset or single row)
      */
-  getUsers() { 
+  getUsers() {
     return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), 'in', this.currentRoom.users)).snapshotChanges();
   }
 
-  getmyUsers() { 
+  getmyUsers() {
     return this.db.collection('/users', ref => ref.where(firebase.firestore.FieldPath.documentId(), 'in', this.myusers)).snapshotChanges();
   }
 
   getmyroomLocations() {
-    console.log("tänne",this.myRoom)
-    return this.db.collection('room/', ref => ref.where(firebase.firestore.FieldPath.documentId(),'==' , this.myRoom)).snapshotChanges();
+    console.log("tänne", this.myRoom)
+    return this.db.collection('room/', ref => ref.where(firebase.firestore.FieldPath.documentId(), '==', this.myRoom)).snapshotChanges();
   }
 
   create_NewUser(userdata) {
     return this.db.collection('users').doc(this.username).set(userdata);
   }
 
-  add_Room(room){
+  add_Room(room) {
     return this.db.collection('room').doc(this.currentRoom.id).update(room);
   }
 
-  getRooms() { 
+  getRooms() {
     return this.db.collection('room').snapshotChanges();
   }
 
